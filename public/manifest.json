@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "PDF Manager",
+  "name": "PDF Manager 中文版",
   "version": "1.1.0",
-  "description": "Assemble, preview, and export PDFs entirely in your browser. Files never leave your device.",
+  "description": "本地预览、整理、合并及导出 PDF；文件不会上传。",
   "action": {
-    "default_title": "Open PDF Manager",
+    "default_title": "打开 PDF 管理器",
     "default_icon": {
       "16": "icons/16.png",
       "48": "icons/48.png",

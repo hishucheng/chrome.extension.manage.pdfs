@@ -88,19 +88,19 @@ export function SourcePane() {
       {/* Pane header */}
       <div className="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-800 flex-shrink-0">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-          Source / Resources
+          素材区 / 原始文件
         </h2>
         {resources.length > 0 && (
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-600">
-              {resources.length} {resources.length === 1 ? 'file' : 'files'} &mdash; {formatBytes(totalBytes)}
+              {resources.length} 个文件 &mdash; {formatBytes(totalBytes)}
             </span>
             <button
               type="button"
               onClick={clearResources}
               className="text-xs text-gray-600 hover:text-red-400 transition-colors px-2 py-0.5 rounded hover:bg-gray-800"
             >
-              Clear all
+              全部清空
             </button>
           </div>
         )}
@@ -115,7 +115,7 @@ export function SourcePane() {
         {isLoading && (
           <div className="flex items-center gap-2 px-3 py-2 bg-blue-900/20 border border-blue-800/40 rounded-lg">
             <div className="w-3 h-3 rounded-full border-2 border-blue-400 border-t-transparent animate-spin flex-shrink-0" />
-            <p className="text-xs text-blue-300">Processing files...</p>
+            <p className="text-xs text-blue-300">正在处理文件……</p>
           </div>
         )}
 
@@ -145,7 +145,7 @@ export function SourcePane() {
                 <p className="text-xs text-red-300 flex-1">{err.message}</p>
                 <button
                   type="button"
-                  aria-label="Dismiss error"
+                  aria-label="关闭错误提示"
                   onClick={() => dismissError(err.id)}
                   className="text-red-600 hover:text-red-400 ml-1 flex-shrink-0"
                 >
@@ -175,7 +175,7 @@ export function SourcePane() {
         {/* Empty state when no resources and not loading */}
         {resources.length === 0 && !isLoading && (
           <p className="text-center text-xs text-gray-700 mt-4">
-            No resources loaded yet.
+            尚未添加文件。
           </p>
         )}
       </div>

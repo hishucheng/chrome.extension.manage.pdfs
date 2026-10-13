@@ -84,7 +84,7 @@ export function DestinationPane() {
         onProgress: (fraction) => setExportProgress(fraction),
       });
 
-      downloadPdf(pdfBytes, 'result.pdf');
+      downloadPdf(pdfBytes, '整理结果.pdf');
     } catch (err) {
       setExportError(String(err));
     } finally {
@@ -133,9 +133,9 @@ export function DestinationPane() {
     : null;
 
   const profileLabels: Record<ExportProfile, string> = {
-    print: 'Optimized for printing',
-    web: 'Optimized for web sharing',
-    compressed: 'Compressed',
+    print: '打印优先（高质量）',
+    web: '网络分享（均衡）',
+    compressed: '高压缩（页面转图片）',
   };
 
   return (
@@ -144,11 +144,11 @@ export function DestinationPane() {
       <div className="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-800 flex-shrink-0">
         <div className="flex items-center gap-2">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-            Result / Destination PDF
+            成品区 / 输出 PDF
           </h2>
           {destinationItems.length > 0 && (
             <span className="text-xs text-gray-600 tabular-nums">
-              {destinationItems.length} {destinationItems.length === 1 ? 'item' : 'items'}
+              {destinationItems.length} 页
             </span>
           )}
         </div>
@@ -159,7 +159,7 @@ export function DestinationPane() {
               onClick={clearDestination}
               className="text-xs text-gray-600 hover:text-red-400 transition-colors px-2 py-0.5 rounded hover:bg-gray-800"
             >
-              Clear all
+              全部清空
             </button>
           )}
           <select
@@ -184,8 +184,8 @@ export function DestinationPane() {
             {isExporting
               ? exportProgress > 0
                 ? `${Math.round(exportProgress * 100)}%`
-                : 'Exporting...'
-              : 'Export PDF'}
+                : '正在导出……'
+              : '导出 PDF'}
           </button>
         </div>
       </div>
@@ -217,7 +217,7 @@ export function DestinationPane() {
                 className="grid gap-2 p-3"
                 style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))' }}
                 role="list"
-                aria-label="Destination items — drag to reorder"
+                aria-label="成品页面：拖动调整顺序"
               >
                 {destinationItems.map((item, index) => (
                   <SortableDestinationCard
@@ -246,16 +246,16 @@ export function DestinationPane() {
         <div className="px-4 py-2 bg-gray-900 border-t border-gray-800 flex-shrink-0">
           {exportError ? (
             <p className="text-xs text-red-400">
-              Export failed: {exportError}
+              导出失败： {exportError}
             </p>
           ) : isExporting ? (
             <p className="text-xs text-yellow-400">
-              Assembling PDF... {exportProgress > 0 ? `${Math.round(exportProgress * 100)}%` : ''}
+              正在生成 PDF…… {exportProgress > 0 ? `${Math.round(exportProgress * 100)}%` : ''}
             </p>
           ) : (
             <p className="text-xs text-gray-600">
-              {destinationItems.length} {destinationItems.length === 1 ? 'item' : 'items'} in destination order &mdash; drag to reorder
-              {activeExportProfile === 'compressed' && ' — Compressed profile rasterizes PDF pages (text becomes image)'}
+              {destinationItems.length} 页 &mdash; 拖动页面可调整顺序
+              {activeExportProfile === 'compressed' && ' — 高压缩模式会将 PDF 页面转换为图片，文字可能无法选择'}
             </p>
           )}
         </div>
@@ -295,12 +295,11 @@ function EmptyState({ isOver }: EmptyStateProps) {
         </svg>
       </div>
       <p className={['text-sm transition-colors', isOver ? 'text-blue-300' : 'text-gray-500'].join(' ')}>
-        {isOver ? 'Release to add to destination' : 'No pages assembled yet'}
+        {isOver ? '松开鼠标，添加到成品区' : '成品区尚无页面'}
       </p>
       <p className="text-xs text-gray-700 mt-2 max-w-xs leading-relaxed">
-        Drag PDF page tiles, images, or text resources from the Source pane into
-        this area. For multi-page PDFs, multi-select pages first (Ctrl/Cmd-click
-        or Shift-click), then drag any selected tile to drop the whole selection.
+        将左侧的 PDF 页面、图片或文本拖到这里。多页 PDF 可先按住 Ctrl / ⌘ 或 Shift 多选，
+        再拖动任意已选页面，将它们一起加入。
       </p>
     </div>
   );
@@ -366,7 +365,7 @@ function SortableDestinationCard({
         {/* Duplicate */}
         <button
           type="button"
-          aria-label="Duplicate item"
+          aria-label="复制这一页"
           onClick={(e) => {
             e.stopPropagation();
             onDuplicate(item.id);
@@ -382,7 +381,7 @@ function SortableDestinationCard({
         {/* Remove */}
         <button
           type="button"
-          aria-label="Remove item"
+          aria-label="删除这一页"
           onClick={(e) => {
             e.stopPropagation();
             onRemove(item.id);

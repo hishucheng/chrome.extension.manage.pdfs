@@ -103,9 +103,9 @@ export function App() {
       <div className="flex h-screen w-screen overflow-hidden bg-gray-950 text-gray-100 font-sans">
         {/* Header bar */}
         <div className="absolute top-0 left-0 right-0 h-12 bg-gray-900 border-b border-gray-800 flex items-center px-4 z-10">
-          <span className="text-blue-400 font-semibold tracking-wide text-sm">PDF Manager</span>
+          <span className="text-blue-400 font-semibold tracking-wide text-sm">PDF 管理器</span>
           <span className="ml-3 text-gray-500 text-xs">
-            Client-side only &mdash; files never leave your browser
+            仅在本地处理 &mdash; 文件不会上传
           </span>
         </div>
 
@@ -142,12 +142,12 @@ interface DragCountOverlayProps {
 function DragCountOverlay({ count, kind }: DragCountOverlayProps) {
   const label =
     kind === 'image'
-      ? 'image'
+      ? '图片'
       : kind === 'text'
-        ? 'text'
+        ? '文本'
         : count === 1
-          ? '1 page'
-          : `${count} pages`;
+          ? '1 页'
+          : `${count} 页`;
 
   return (
     <div className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white text-xs font-semibold rounded-lg shadow-xl opacity-90 pointer-events-none select-none">

@@ -57,7 +57,7 @@ export function Dropzone({ onFiles, disabled = false }: DropzoneProps) {
     <div
       role="button"
       tabIndex={disabled ? -1 : 0}
-      aria-label="Drop zone: drop PDF, image, or text files here"
+      aria-label="文件导入区：拖入 PDF、图片或文本文件"
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -92,11 +92,11 @@ export function Dropzone({ onFiles, disabled = false }: DropzoneProps) {
       </div>
 
       <p className="text-sm text-gray-300 pointer-events-none">
-        {isDragOver ? 'Drop files to load' : 'Drop PDF, image, or text files here'}
+        {isDragOver ? '松开鼠标，导入文件' : '将 PDF、图片或文本文件拖到此处'}
       </p>
-      <p className="text-xs text-gray-500 pointer-events-none">or click to choose files</p>
+      <p className="text-xs text-gray-500 pointer-events-none">或单击选择文件</p>
       <p className="text-xs text-gray-600 pointer-events-none">
-        PDF, PNG, JPEG, WebP, GIF, plain text &mdash; up to 200 MB each
+        支持 PDF、PNG、JPEG、WebP、GIF、TXT &mdash; 每个文件不超过 200 MB
       </p>
 
       {/* Hidden file input */}

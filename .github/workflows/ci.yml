@@ -50,3 +50,10 @@ jobs:
             exit 1
           fi
           echo "pdf.js worker present in dist/assets."
+
+      - name: Upload Chrome extension package
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF-Manager-zh-CN-unpacked
+          path: dist/
+          retention-days: 30

@@ -84,7 +84,7 @@ export function ResourceCard({ resource, onRemove, onPreview }: ResourceCardProp
         {/* Thumbnail / icon — clicking opens the lightbox at page 0 */}
         <button
           type="button"
-          aria-label={`Preview ${name}`}
+          aria-label={`预览 ${name}`}
           className={[
             'flex-shrink-0 w-16 h-20 bg-gray-800 rounded overflow-hidden border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
             isCardDraggable ? 'cursor-grab active:cursor-grabbing' : '',
@@ -109,10 +109,10 @@ export function ResourceCard({ resource, onRemove, onPreview }: ResourceCardProp
 
           {/* Drag hint for draggable cards */}
           {isCardDraggable && (
-            <p className="text-xs text-gray-700 mt-1">Drag to destination</p>
+            <p className="text-xs text-gray-700 mt-1">拖入右侧成品区</p>
           )}
           {isMultiPage && (
-            <p className="text-xs text-gray-700 mt-1">Expand pages to drag individually</p>
+            <p className="text-xs text-gray-700 mt-1">展开页面后可单独拖动</p>
           )}
 
           {/* Show / Hide pages toggle for multi-page PDFs */}
@@ -136,7 +136,7 @@ export function ResourceCard({ resource, onRemove, onPreview }: ResourceCardProp
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
-              {gridExpanded ? 'Hide pages' : 'Show pages'}
+              {gridExpanded ? '收起页面' : '展开页面'}
             </button>
           )}
         </div>
@@ -144,7 +144,7 @@ export function ResourceCard({ resource, onRemove, onPreview }: ResourceCardProp
         {/* Remove button — visible on hover/focus */}
         <button
           type="button"
-          aria-label={`Remove ${name}`}
+          aria-label={`移除 ${name}`}
           onClick={handleRemove}
           onPointerDown={(e) => e.stopPropagation()}
           className="flex-shrink-0 mt-0.5 p-1 rounded text-gray-600 hover:text-red-400 hover:bg-gray-800 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
@@ -188,7 +188,7 @@ function ThumbnailArea({ data }: ThumbnailAreaProps) {
       return (
         <img
           src={url}
-          alt="Page 1"
+          alt="第 1 页"
           className="w-full h-full object-contain"
           loading="lazy"
         />
@@ -201,7 +201,7 @@ function ThumbnailArea({ data }: ThumbnailAreaProps) {
     return (
       <img
         src={(data as ImageResourceData).objectUrl}
-        alt="Preview"
+        alt="预览"
         className="w-full h-full object-contain"
         loading="lazy"
       />
@@ -261,7 +261,7 @@ function MetaLines({ data }: MetaLinesProps) {
     return (
       <div className="mt-1 space-y-0.5">
         <p className="text-xs text-gray-400">
-          {pdf.pageCount} {pdf.pageCount === 1 ? 'page' : 'pages'}
+          共 {pdf.pageCount} 页
           {dim ? ` — ${Math.round(dim.width)} x ${Math.round(dim.height)} pt` : ''}
         </p>
         {pdf.title && (
@@ -282,11 +282,11 @@ function MetaLines({ data }: MetaLinesProps) {
     const img = data as ImageResourceData;
     return (
       <p className="text-xs text-gray-400 mt-1">
-        {img.width > 0 ? `${img.width} x ${img.height} px` : 'Image'}
+        {img.width > 0 ? `${img.width} x ${img.height} px` : '图片'}
       </p>
     );
   }
 
   // text
-  return <p className="text-xs text-gray-400 mt-1">Plain text</p>;
+  return <p className="text-xs text-gray-400 mt-1">纯文本</p>;
 }

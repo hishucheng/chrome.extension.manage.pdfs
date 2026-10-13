@@ -4,7 +4,7 @@
 //   - Plain click        -> select only that tile (deselect others)
 //   - Ctrl/Cmd-click     -> toggle tile in/out of selection
 //   - Shift-click        -> extend range from last selected tile
-//   - "Select all" link  -> select all pages
+//   - "全选" link  -> select all pages
 //   - "Clear" link       -> deselect all
 //
 // Thumbnails are rendered lazily: the grid generates them on first expansion,
@@ -167,10 +167,10 @@ export function PageGrid({ resourceId, data, pdfDoc, onOpenLightbox }: PageGridP
       {/* Grid controls row */}
       <div className="flex items-center justify-between mb-2 px-0.5">
         <span className="text-xs text-gray-500">
-          {data.pageCount} {data.pageCount === 1 ? 'page' : 'pages'}
+          共 {data.pageCount} 页
           {selectionCount > 0 && (
             <span className="ml-1 text-blue-400 font-medium">
-              &mdash; {selectionCount} selected
+              &mdash; 已选 {selectionCount} 页
             </span>
           )}
         </span>
@@ -180,7 +180,7 @@ export function PageGrid({ resourceId, data, pdfDoc, onOpenLightbox }: PageGridP
             onClick={handleSelectAll}
             className="text-gray-500 hover:text-gray-300 transition-colors"
           >
-            Select all
+            全选
           </button>
           {selectionCount > 0 && (
             <button
@@ -188,7 +188,7 @@ export function PageGrid({ resourceId, data, pdfDoc, onOpenLightbox }: PageGridP
               onClick={handleClear}
               className="text-gray-500 hover:text-gray-300 transition-colors"
             >
-              Clear
+              取消选择
             </button>
           )}
         </div>
@@ -199,7 +199,7 @@ export function PageGrid({ resourceId, data, pdfDoc, onOpenLightbox }: PageGridP
         className="grid gap-1.5"
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))' }}
         role="list"
-        aria-label={`Pages for this PDF`}
+        aria-label="PDF 页面列表"
         aria-multiselectable="true"
       >
         {Array.from({ length: data.pageCount }, (_, i) => (
@@ -259,7 +259,7 @@ function PageTile({
     <div
       ref={setNodeRef}
       aria-selected={isSelected}
-      aria-label={`Page ${pageIndex + 1}`}
+      aria-label={`第 ${pageIndex + 1} 页`}
       className={[
         'relative group cursor-grab active:cursor-grabbing rounded overflow-hidden border transition-all select-none',
         isDragging ? 'opacity-40 border-blue-400' : '',
@@ -278,7 +278,7 @@ function PageTile({
       {url ? (
         <img
           src={url}
-          alt={`Page ${pageIndex + 1}`}
+          alt={`第 ${pageIndex + 1} 页`}
           className="w-full h-full object-contain bg-gray-800"
           loading="lazy"
           draggable={false}
@@ -330,7 +330,7 @@ function PageTile({
       {/* Zoom/expand icon — clicking opens the lightbox */}
       <button
         type="button"
-        aria-label={`Open page ${pageIndex + 1} in lightbox`}
+        aria-label={`预览第 ${pageIndex + 1} 页`}
         className="absolute top-1 right-1 p-0.5 rounded bg-black/50 text-gray-300 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
         onClick={(e) => onOpenLightbox(pageIndex, e)}
         // Stop drag listeners from triggering on the icon click.
