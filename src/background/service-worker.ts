@@ -28,7 +28,7 @@ chrome.action.onClicked.addListener(() => {
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'open-pdf-manager',
-    title: 'Open PDF Manager',
+    title: '打开 PDF 管理器',
     contexts: ['action'],
   });
 });
@@ -38,7 +38,7 @@ chrome.runtime.onStartup.addListener(() => {
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({
       id: 'open-pdf-manager',
-      title: 'Open PDF Manager',
+      title: '打开 PDF 管理器',
       contexts: ['action'],
     });
   });

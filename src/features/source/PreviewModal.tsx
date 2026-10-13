@@ -193,7 +193,7 @@ export function PreviewModal({
       className="fixed inset-0 z-50 flex flex-col bg-black/85 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-label={`Preview: ${resource.name}`}
+      aria-label={`预览：${resource.name}`}
     >
       {/* Header bar */}
       <div className="flex items-center justify-between px-4 py-2 bg-gray-900/95 border-b border-gray-800 flex-shrink-0">
@@ -204,7 +204,7 @@ export function PreviewModal({
           <p className="text-xs text-gray-500">
             {formatBytes(resource.sizeBytes)}
             {data.kind === 'pdf' && (
-              <> &mdash; {pageCount} {pageCount === 1 ? 'page' : 'pages'}</>
+              <> &mdash; 共 {pageCount} 页</>
             )}
             {data.kind === 'image' && (
               <> &mdash; {(data as ImageResourceData).width} x {(data as ImageResourceData).height} px</>
@@ -217,7 +217,7 @@ export function PreviewModal({
           <div className="flex items-center gap-1 mx-4 flex-shrink-0">
             <button
               type="button"
-              aria-label="Zoom out"
+              aria-label="缩小"
               onClick={handleZoomOut}
               disabled={zoomMode === 'actual' && zoomLevel <= ZOOM_MIN}
               className="p-1.5 rounded text-gray-400 hover:text-gray-200 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -229,16 +229,16 @@ export function PreviewModal({
 
             <button
               type="button"
-              aria-label={zoomMode === 'fit' ? 'Switch to actual size' : 'Switch to fit-to-window'}
+              aria-label={zoomMode === 'fit' ? '切换到实际大小' : '切换到适合窗口'}
               onClick={handleToggleFit}
               className="px-2.5 py-1 rounded text-xs font-mono text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors min-w-[52px] text-center"
             >
-              {zoomMode === 'fit' ? 'Fit' : `${Math.round(zoomLevel * 100)}%`}
+              {zoomMode === 'fit' ? '适合窗口' : `${Math.round(zoomLevel * 100)}%`}
             </button>
 
             <button
               type="button"
-              aria-label="Zoom in"
+              aria-label="放大"
               onClick={handleZoomIn}
               disabled={zoomMode === 'actual' && zoomLevel >= ZOOM_MAX}
               className="p-1.5 rounded text-gray-400 hover:text-gray-200 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -253,7 +253,7 @@ export function PreviewModal({
         {/* Close button */}
         <button
           type="button"
-          aria-label="Close preview"
+          aria-label="关闭预览"
           onClick={onClose}
           className="flex-shrink-0 p-1.5 rounded-lg text-gray-500 hover:text-gray-200 hover:bg-gray-800 transition-colors"
         >
@@ -281,17 +281,17 @@ export function PreviewModal({
           ) : isRendering ? (
             <div className="flex flex-col items-center gap-3 mt-20 text-gray-500">
               <div className="w-6 h-6 rounded-full border-2 border-gray-500 border-t-transparent animate-spin" />
-              <span className="text-sm">Rendering...</span>
+              <span className="text-sm">正在渲染……</span>
             </div>
           ) : highResUrl ? (
             <img
               src={highResUrl}
-              alt={data.kind === 'pdf' ? `Page ${currentPage + 1}` : resource.name}
+              alt={data.kind === 'pdf' ? `第 ${currentPage + 1} 页` : resource.name}
               style={imageStyle}
               className="rounded shadow-xl transition-all duration-150"
             />
           ) : (
-            <div className="text-gray-600 text-sm mt-20">No preview available.</div>
+            <div className="text-gray-600 text-sm mt-20">无法预览此文件。</div>
           )}
         </div>
       </div>
@@ -301,7 +301,7 @@ export function PreviewModal({
         <div className="flex items-center justify-center gap-4 px-4 py-2.5 bg-gray-900/95 border-t border-gray-800 flex-shrink-0">
           <button
             type="button"
-            aria-label="Previous page"
+            aria-label="上一页"
             disabled={currentPage === 0}
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 0))}
             className="p-1.5 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -317,7 +317,7 @@ export function PreviewModal({
 
           <button
             type="button"
-            aria-label="Next page"
+            aria-label="下一页"
             disabled={currentPage === pageCount - 1}
             onClick={() => setCurrentPage((p) => Math.min(p + 1, pageCount - 1))}
             className="p-1.5 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -331,11 +331,11 @@ export function PreviewModal({
 
       {/* Keyboard hint */}
       <div className="flex items-center justify-center gap-4 px-4 py-1.5 bg-gray-900/80 border-t border-gray-800 flex-shrink-0">
-        <span className="text-xs text-gray-700">Esc to close</span>
+        <span className="text-xs text-gray-700">Esc 关闭预览</span>
         {data.kind === 'pdf' && pageCount > 1 && (
-          <span className="text-xs text-gray-700">Arrow keys to navigate</span>
+          <span className="text-xs text-gray-700">方向键切换页面</span>
         )}
-        <span className="text-xs text-gray-700">+/- to zoom &mdash; 0 to fit</span>
+        <span className="text-xs text-gray-700">+/- 缩放 &mdash; 0 适合窗口</span>
       </div>
     </div>
   );

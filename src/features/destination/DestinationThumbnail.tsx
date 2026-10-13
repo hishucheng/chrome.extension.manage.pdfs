@@ -122,7 +122,7 @@ export function DestinationThumbnail({
     return (
       <div className={`flex flex-col bg-gray-100 text-gray-800 p-1 overflow-hidden ${className}`}>
         <span className="text-[7px] leading-tight whitespace-pre-wrap break-words overflow-hidden">
-          {snippet || 'Text'}
+          {snippet || '文本'}
         </span>
       </div>
     );
@@ -157,7 +157,7 @@ export function DestinationThumbnail({
     );
   }
 
-  const alt = kind === 'pdf-page' ? `Page ${pageIndex + 1}` : 'Image';
+  const alt = kind === 'pdf-page' ? `第 ${pageIndex + 1} 页` : '图片';
   return (
     <img
       src={thumbUrl}
